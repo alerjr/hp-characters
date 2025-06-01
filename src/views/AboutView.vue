@@ -64,7 +64,7 @@ const s = window.scrollTo({ top: 0, behavior: 'smooth' })
             href="https://github.com/alerjr"
             class="card-link text-center"
             target="”_blank”"
-            >Github</a
+            >Github <span><img src="../assets/github.svg" style="width: 24px; height: 24px; object-fit: contain;"></span></a
           >
         </div>
       </div>
@@ -101,7 +101,7 @@ ul li {
   color: rgba(255, 255, 255, 0.526);
 }
 
-img {
+.card-img-top {
   width: 100%;
   object-fit: cover;
   object-position: center;

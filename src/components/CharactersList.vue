@@ -47,16 +47,12 @@
             <!-- Chama a função para selecionar o personagem ao clicar no cartão -->
             <div class="card mt-4 p-2" @click="selectCharacter(character)">
               <div class="card-body">
-                <img
-                  :src="character.image"
-                  class="card-img-top w-50"
-                  id="listImage"
-                />
+                <img :src="character.image" class="card-img-top w-50" id="listImage" />
                 <!-- Nome do personagem -->
-                <h5 class="card-title">{{ character.name }}</h5>
+                <h4 class="card-title">{{ character.name }}</h4>
                 <!-- Casa do personagem -->
                 <p class="card-text">
-                  <strong>House: </strong> {{ character.house || 'No house' }}
+                  <strong>House: </strong> {{ character.house || "No house" }}
                 </p>
                 <!-- Espécie do personagem -->
                 <p class="card-text">
@@ -73,57 +69,55 @@
 
 <script>
 // Importações necessárias do Vue
-import { ref, onMounted, computed } from 'vue'
-import CharacterSelected from './CharacterSelected.vue'
+import { ref, onMounted, computed } from "vue";
+import CharacterSelected from "./CharacterSelected.vue";
 
 export default {
-  name: 'CharactersList',
+  name: "CharactersList",
   // Declaração do componente CharacterSelected como um componente filho
   components: {
     CharacterSelected,
   },
   setup() {
-    const characters = ref([]) // Lista de todos os personagens
-    const loading = ref(true) // Estado de carregamento da API
-    const error = ref(null) // Armazena mensagens de erro, se houver
-    const selectedCharacter = ref(null) // Armazena o personagem selecionado
-    const searchTerm = ref('') // Termo de pesquisa para filtrar personagens
+    const characters = ref([]); // Lista de todos os personagens
+    const loading = ref(true); // Estado de carregamento da API
+    const error = ref(null); // Armazena mensagens de erro, se houver
+    const selectedCharacter = ref(null); // Armazena o personagem selecionado
+    const searchTerm = ref(""); // Termo de pesquisa para filtrar personagens
 
     // Função para buscar dados da API de personagens
     const fetchCharacters = async () => {
       try {
         // Requisição para obter as informações dos personagens
-        const response = await fetch(
-          'https://hp-api.onrender.com/api/characters'
-        )
+        const response = await fetch("https://hp-api.onrender.com/api/characters");
         if (!response.ok) {
-          throw new Error('Erro ao buscar dados.') // Lança um erro se a resposta não for ok
+          throw new Error("Erro ao buscar dados."); // Lança um erro se a resposta não for ok
         }
         // Obtém todos os personagens e limita a lista aos primeiros 21
-        const allCharacters = await response.json()
-        characters.value = allCharacters.slice(0, 21)
+        const allCharacters = await response.json();
+        characters.value = allCharacters.slice(0, 21);
       } catch (err) {
-        error.value = err.message // Armazena a mensagem de erro
+        error.value = err.message; // Armazena a mensagem de erro
       } finally {
-        loading.value = false // Atualiza o estado de carregamento
+        loading.value = false; // Atualiza o estado de carregamento
       }
-    }
+    };
 
     // Função para selecionar um personagem quando o cartão é clicado
-    const selectCharacter = character => {
-      selectedCharacter.value = character
-      window.scrollTo({ top: 0, behavior: 'smooth' })
-    }
+    const selectCharacter = (character) => {
+      selectedCharacter.value = character;
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    };
 
     // Computed para filtrar personagens baseado no termo de pesquisa
     const filteredCharacters = computed(() => {
-      return characters.value.filter(character =>
+      return characters.value.filter((character) =>
         character.name.toLowerCase().includes(searchTerm.value.toLowerCase())
-      )
-    })
+      );
+    });
 
     // Busca os personagens assim que o componente é montado
-    onMounted(fetchCharacters)
+    onMounted(fetchCharacters);
 
     return {
       characters,
@@ -133,9 +127,9 @@ export default {
       selectCharacter,
       searchTerm,
       filteredCharacters,
-    }
+    };
   },
-}
+};
 </script>
 
 <style>
@@ -196,8 +190,8 @@ img {
 .loader {
   width: 90px;
   height: 14px;
-  background: radial-gradient(circle closest-side, #000 92%, #0000)
-    calc(100% / 3) 0 / calc(100% / 4) 100%;
+  background: radial-gradient(circle closest-side, #000 92%, #0000) calc(100% / 3) 0 /
+    calc(100% / 4) 100%;
   animation: l2 0.5s infinite linear;
 }
 @keyframes l2 {
@@ -219,4 +213,7 @@ img {
   z-index: 1000;
 }
 
+h4 {
+  font-family: "Jolly Lodger", system-ui;
+}
 </style>

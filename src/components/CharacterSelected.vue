@@ -12,7 +12,7 @@
       />
       <div class="card-body">
         <!-- Nome do personagem -->
-        <h5 class="card-title">{{ name }}</h5>
+        <h4 class="card-title">{{ name }}</h4>
         <!-- Descricao do personagem  -->
         <p class="card-text">
           {{ species.toString().capitalize() }}, {{ gender }},
@@ -73,11 +73,6 @@ Object.defineProperty(String.prototype, 'capitalize', {
 
 export default {
   name: 'CharacterSelected',
-  data() {
-    return {
-      dateOfBirth: '', // Altere para uma data válida ou mantenha vazio
-    }
-  },
   // Props de imagem e nome
   props: {
     image: {
